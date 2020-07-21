@@ -11,25 +11,16 @@ import { RouterModule } from '@angular/router';
 * Components
 */
 import { AppComponent } from './app.component';
-import { ProductListComponent } from './products/product-list.component';
-
 /*
 * Pipes and nested components
 */
-import { ConvertToSpacePipe } from './shared/custom-pipes/convert-to-space-pipe';
-import { StarComponent } from './shared/components/star-component/star.component';
-import { ProductDetailsComponent } from './products/product-details/product-details.component';
-import { from } from 'rxjs';
+
 import { WelcomeComponent } from './home/welcome.component';
-import { ProductGuardGuard } from './products/product-guard.guard';
+import { ProductsModule } from './products/products.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductListComponent,
-    ConvertToSpacePipe,
-    StarComponent,
-    ProductDetailsComponent,
     WelcomeComponent
   ],
   imports: [
@@ -38,16 +29,11 @@ import { ProductGuardGuard } from './products/product-guard.guard';
     HttpClientModule,
     RouterModule.forRoot([
 
-      {path: 'products', component: ProductListComponent},
-      {
-        path: 'products/:id', 
-        canActivate: [ProductGuardGuard],
-        component: ProductDetailsComponent
-      },
       {path: 'welcome', component: WelcomeComponent},
       {path: ' ', redirectTo: 'welcome', pathMatch:'full'},
       {path: '**', redirectTo: 'welcome', pathMatch: 'full'},
-    ])
+    ]),
+    ProductsModule
     
   ],
   bootstrap: [AppComponent]
